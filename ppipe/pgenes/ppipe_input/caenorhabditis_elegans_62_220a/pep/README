@@ -1,0 +1,72 @@
+#### README ####
+
+IMPORTANT: Please note you can download correlation data tables,
+supported by Ensembl, via the highly customisable BioMart and
+EnsMart data mining tools. See http://www.ensembl.org/biomart/martview or
+http://www.ebi.ac.uk/biomart/ for more information.
+
+
+####################
+Fasta Peptide dumps
+####################
+These files hold the protein translations of Ensembl gene predictions.
+
+-----------
+FILE NAMES
+------------
+The files are consistently named following this pattern:
+   <species>.<assembly>.<release>.<sequence type>.<status>.fa.gz
+
+<species>:       The systematic name of the species.
+<assembly>:      The assembly build name.
+<release>:       The release number.
+<sequence type>: pep for peptide sequences
+<status>
+  * 'pep.all' - the super-set of all translations resulting from Ensembl known
+     or novel gene predictions.
+  * 'pep.abinitio' translations resulting from 'ab initio' gene
+     prediction algorithms such as SNAP and GENSCAN. In general, all
+     'ab initio' predictions are based solely on the genomic sequence and
+     not any other experimental evidence. Therefore, not all GENSCAN
+     or SNAP predictions represent biologically real proteins.
+fa : All files in these directories represent FASTA database files
+gz : All files are compacted with GNU Zip for storage efficiency.
+
+EXAMPLES (Note: Most species do not sequences for each different <status>)
+ for Human:
+    Homo_sapiens.NCBI36.40.pep.all.fa.gz
+      contains all known and novel peptides
+    Homo_sapiens.NCBI36.40.pep.abinitio.fa.gz
+      contains all abinitio predicted peptide
+
+Difference between known and novel
+----------------------------------
+Protein models that can be mapped to species-specific entries in
+Swiss-Prot, RefSeq or SPTrEMBL are referred to in Ensembl as
+known genes.  Those that cannot be mapped are called novel
+(e.g. genes predicted on the basis of evidence from closely related species).
+
+For models annotated by HAVANA the status is set manually. Models that have 
+an HGNC name are referred to as known and the remaining models are referred to
+as novel.
+
+-------------------------------
+FASTA Sequence Header Lines
+------------------------------
+The FASTA sequence header lines are designed to be consistent across
+all types of Ensembl FASTA sequences.  This gives enough information
+for the sequence to be identified outside the context of the FASTA
+database file.
+
+General format:
+
+>ID SEQTYPE:STATUS LOCATION GENE TRANSCRIPT
+
+Example of Ensembl Peptide header:
+
+>ENSP00000328693 pep:novel chromosome:NCBI35:1:904515:910768:1 gene:ENSG00000158815:transcript:ENST00000328693
+ ^               ^   ^     ^                                   ^                    ^
+ ID              |   |  LOCATION                          GENE:stable gene ID       |
+                 | STATUS                                           TRANSCRIPT: stable transcript ID
+               SEQTYPE
+
